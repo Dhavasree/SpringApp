@@ -30,4 +30,10 @@ public class ProductService {
 	public void save(Product product) {
 		productDao.save(product);
 	}
+	@Transactional
+	public void delete(long id) {
+		productDao.delete(id);
+	}
+
+	
 }

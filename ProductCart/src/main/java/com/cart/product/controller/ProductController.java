@@ -7,7 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +33,14 @@ public class ProductController {
 		modelAndView.addObject("productli", productService.findAllProduct());
 		return modelAndView;
 	}
-
+	@RequestMapping("/{id}/delete")
+	public ModelAndView productDel(@PathVariable("id") long id) {
+		System.out.println("del prod");
+		ModelAndView modelAndView = new ModelAndView("productlist");
+		productService.delete(id);
+		modelAndView.addObject("productli",productService.findAllProduct() );
+		return modelAndView;
+	}
 	@RequestMapping("/saveproduct")
 	public ModelAndView productSave(
 			@ModelAttribute(value = "product") Product product,

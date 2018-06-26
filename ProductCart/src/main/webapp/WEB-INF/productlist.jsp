@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html>
 <head>
 <title>My Product List</title>
@@ -39,18 +41,26 @@
 		<table class="table table-striped" id="myList">
 
 			<tr>
+				<th>ID</th>
+
 				<th>Brand Name</th>
 				<th>Model</th>
 				<th>Product Price</th>
 				<th>Country</th>
+				<th>Oper</th>
+
 			</tr>
 			<c:forEach items="${productli}" var="product">
 				<tbody id="myTable">
 					<tr>
+						<td>${product.id}</td>
 						<td>${product.brand_name}</td>
 						<td>${product.model}</td>
 						<td>${product.price}</td>
 						<td>${product.country}</td>
+						<td><spring:url value="/${product.id}/delete" var="deleteUrl" />
+							<button class="btn btn-danger"
+								onclick="location.href='${deleteUrl}'">Delete</button></td>
 					</tr>
 				</tbody>
 				<br />
